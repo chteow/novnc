@@ -1,4 +1,4 @@
-Remote Desktop Over The Internet
+# Remote Desktop Over The Internet
 
 sudo apt install tigervnc-standalone-server tigervnc-xorg-extension tigervnc-viewer
 
@@ -6,7 +6,7 @@ Go to /usr/local/share folder and clone here a GitHub repository with noVNC:
 sudo git clone git://github.com/kanaka/noVNC
 
 
-vncserver@:1.service
+# vncserver@:1.service
 [Unit]
 Description=Remote desktop service (VNC)
 After=syslog.target network.target
@@ -15,7 +15,6 @@ After=syslog.target network.target
 Type=forking
 User=<user>
 
-# Clean any existing files in /tmp/.X11-unix environment
 ExecStartPre=-/usr/bin/vncserver -kill %i
 ExecStart=/usr/bin/vncserver -geometry 1280x720 -localhost %i
 ExecStop=/usr/bin/vncserver -kill %i
@@ -24,7 +23,7 @@ ExecStop=/usr/bin/vncserver -kill %i
 WantedBy=multi-user.target
 
 
-novnc.service
+# novnc.service
 [Unit]
 Description=Remote desktop service (noVNC)
 Requires=vncserver@:1.service
@@ -41,7 +40,7 @@ ExecStart=/usr/local/share/noVNC/utils/novnc_proxy --vnc localhost:5901 --listen
 WantedBy=multi-user.target
 
 
-Nginx conf
+# Nginx conf
 
 location /websockify {
        proxy_http_version 1.1;
